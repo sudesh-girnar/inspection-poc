@@ -1,6 +1,10 @@
 import 'dart:convert';
+import 'dart:io';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/services.dart' show rootBundle;
 import 'package:get/get.dart';
+
+import 'custom_camera.dart';
 
 class PocController extends GetxController {
   Rxn<Map<String, dynamic>> data = Rxn();
@@ -60,4 +64,15 @@ class PocController extends GetxController {
     formValuesByTitle[formTitle] = formValues;
   }
 
+  void startImageCapture() async {
+    final List<String>? capturedImagePaths = await Get.to(() => CustomCamera());
+
+    if (capturedImagePaths != null && capturedImagePaths.isNotEmpty) {
+      final List<File> capturedImages = capturedImagePaths.map((path) => File(path)).toList();
+      debugPrint("Captured ${capturedImages.length} images");
+    } else {
+      debugPrint("no images captured");
+    }
+
+  }
 }

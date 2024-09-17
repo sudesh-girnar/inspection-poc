@@ -57,8 +57,19 @@ class POCWidget extends StatelessWidget {
       body: Column(
         crossAxisAlignment: CrossAxisAlignment.stretch,
         children: [
-          // TODO add images form entry point here
-
+          Container(
+            color: Colors.black12,
+            child: InkWell(
+              onTap: () {
+                controller.startImageCapture();
+              },
+              child: const Text(
+                "Vehicle Images",
+                style: TextStyle(fontSize: 18),
+              ),
+            ).paddingAll(10),
+          ),
+          const SizedBox(height: 10,),
           Container(
             color: Colors.black12,
             child: InkWell(
