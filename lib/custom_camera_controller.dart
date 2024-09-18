@@ -98,11 +98,7 @@ class CustomCameraController extends GetxController {
     isCapturing(true);
     try {
       final XFile image = await cameraController.takePicture();
-      capturedVehicleImages.add(VehicleImage(
-        tagName: vehicleTags[currentImageIndex.value].tagName,
-        tagId: vehicleTags[currentImageIndex.value].tagId,
-        imageFile: image,
-      ));
+      addOrUpdateImage(vehicleTags[currentImageIndex.value].tagId, image, vehicleTags[currentImageIndex.value].tagName);
     } catch (e) {
       debugPrint("Capture Error: $e");
     } finally {
