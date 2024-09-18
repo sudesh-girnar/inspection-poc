@@ -1,0 +1,222 @@
+[
+  {
+    "mandatory": true,
+    "numberOfPhotos": 0,
+    "tagId": "116",
+    "tagName": "Profile Picture",
+    "description": "",
+    "location": null,
+    "tagPreviewUrl": "https://qa1inspection.gaadi.com/assets/data/tag_images/Profile_Picture.png",
+    "maskUrl": "https://qa1inspection.gaadi.com/assets/data/tag_images/hb_profile.png"
+  },
+  {
+    "mandatory": true,
+    "numberOfPhotos": 0,
+    "tagId": "97",
+    "tagName": "Right Side (fender, doors, qtr Panel)",
+    "description": "",
+    "location": null,
+    "tagPreviewUrl": "https://qa1inspection.gaadi.com/assets/data/tag_images/Right_Side_fender_doors_qtr_panel.png",
+    "maskUrl": "https://qa1inspection.gaadi.com/assets/data/tag_images/hb_right_side.png"
+  },
+  {
+    "mandatory": true,
+    "numberOfPhotos": 0,
+    "tagId": "96",
+    "tagName": "Rear (bumper, dicky door, rr-windshield, tail lights)",
+    "description": "",
+    "location": null,
+    "tagPreviewUrl": "https://qa1inspection.gaadi.com/assets/data/tag_images/Rear_view.png",
+    "maskUrl": "https://qa1inspection.gaadi.com/assets/data/tag_images/hb_rear_view.png"
+  },
+  {
+    "mandatory": true,
+    "numberOfPhotos": 0,
+    "tagId": "95",
+    "tagName": "Left Side (fender, doors, qtr Panel)",
+    "description": "",
+    "location": null,
+    "tagPreviewUrl": "https://qa1inspection.gaadi.com/assets/data/tag_images/left_side.png",
+    "maskUrl": "https://qa1inspection.gaadi.com/assets/data/tag_images/hb_left_side.png"
+  },
+  {
+    "mandatory": true,
+    "numberOfPhotos": 0,
+    "tagId": "94",
+    "tagName": "Front View (bumper, bonnet, fr-windshield,headlights, grill)",
+    "description": "",
+    "location": null,
+    "tagPreviewUrl": "https://qa1inspection.gaadi.com/assets/data/tag_images/front_view.png",
+    "maskUrl": "https://qa1inspection.gaadi.com/assets/data/tag_images/hb_front_view.png"
+  },
+  {
+    "mandatory": true,
+    "numberOfPhotos": 0,
+    "tagId": "125",
+    "tagName": "Front Windscreen",
+    "description": "",
+    "location": null,
+    "tagPreviewUrl": "https://qa1inspection.gaadi.com/assets/data/tag_images/Front_ws_exterior.png",
+    "maskUrl": ""
+  },
+  {
+    "mandatory": false,
+    "numberOfPhotos": 0,
+    "tagId": "139",
+    "tagName": "Other Images",
+    "description": "",
+    "location": null,
+    "tagPreviewUrl": "",
+    "maskUrl": ""
+  },
+  {
+    "mandatory": false,
+    "numberOfPhotos": 0,
+    "tagId": "122",
+    "tagName": "Front Right or Left Side Interior View",
+    "description": "",
+    "location": null,
+    "tagPreviewUrl": "https://qa1inspection.gaadi.com/assets/data/tag_images/front_interior.jpg",
+    "maskUrl": ""
+  },
+  {
+    "mandatory": false,
+    "numberOfPhotos": 0,
+    "tagId": "124",
+    "tagName": "Front Door Trim",
+    "description": "",
+    "location": null,
+    "tagPreviewUrl": "https://qa1inspection.gaadi.com/assets/data/tag_images/Door_trim.jpg",
+    "maskUrl": ""
+  },
+  {
+    "mandatory": false,
+    "numberOfPhotos": 0,
+    "tagId": "123",
+    "tagName": "Rear Right or Left Side Interior View",
+    "description": "",
+    "location": null,
+    "tagPreviewUrl": "",
+    "maskUrl": ""
+  },
+  {
+    "mandatory": true,
+    "numberOfPhotos": 0,
+    "tagId": "100",
+    "tagName": "Dashboard ( from rear seat)",
+    "description": "",
+    "location": null,
+    "tagPreviewUrl": "https://qa1inspection.gaadi.com/assets/data/tag_images/Dashboard.jpg",
+    "maskUrl": ""
+  },
+  {
+    "mandatory": false,
+    "numberOfPhotos": 0,
+    "tagId": "102",
+    "tagName": "Gear Shift Lever ( from rear seat)",
+    "description": "",
+    "location": null,
+    "tagPreviewUrl": "https://qa1inspection.gaadi.com/assets/data/tag_images/Gear_Lever.jpg",
+    "maskUrl": ""
+  },
+  {
+    "mandatory": true,
+    "numberOfPhotos": 0,
+    "tagId": "99",
+    "tagName": "Odometer reading (with engine on from driver seat)",
+    "description": "",
+    "location": null,
+    "tagPreviewUrl": "https://qa1inspection.gaadi.com/assets/data/tag_images/Odometer.jpg",
+    "maskUrl": ""
+  },
+  {
+    "mandatory": true,
+    "numberOfPhotos": 0,
+    "tagId": "101",
+    "tagName": "ABC Pedals ( from driver seat)",
+    "description": "",
+    "location": null,
+    "tagPreviewUrl": "https://qa1inspection.gaadi.com/assets/data/tag_images/pedals-82.jpg",
+    "maskUrl": ""
+  },
+  {
+    "mandatory": false,
+    "numberOfPhotos": 0,
+    "tagId": "107",
+    "tagName": "Front Right Tyre",
+    "description": "",
+    "location": null,
+    "tagPreviewUrl": "https://qa1inspection.gaadi.com/assets/data/tag_images/front_right_tyre.jpg",
+    "maskUrl": ""
+  },
+  {
+    "mandatory": false,
+    "numberOfPhotos": 0,
+    "tagId": "109",
+    "tagName": "Rear Right Tyre",
+    "description": "",
+    "location": null,
+    "tagPreviewUrl": "https://qa1inspection.gaadi.com/assets/data/tag_images/rear_right_tyre.jpg",
+    "maskUrl": ""
+  },
+  {
+    "mandatory": true,
+    "numberOfPhotos": 0,
+    "tagId": "106",
+    "tagName": "Boot / Dicky",
+    "description": "",
+    "location": null,
+    "tagPreviewUrl": "https://qa1inspection.gaadi.com/assets/data/tag_images/Dickey.jpg",
+    "maskUrl": ""
+  },
+  {
+    "mandatory": false,
+    "numberOfPhotos": 0,
+    "tagId": "111",
+    "tagName": "Spare Tyre",
+    "description": "",
+    "location": null,
+    "tagPreviewUrl": "https://qa1inspection.gaadi.com/assets/data/tag_images/spare_tyre- stepny.jpg",
+    "maskUrl": ""
+  },
+  {
+    "mandatory": false,
+    "numberOfPhotos": 0,
+    "tagId": "110",
+    "tagName": "Rear Left Tyre",
+    "description": "",
+    "location": null,
+    "tagPreviewUrl": "https://qa1inspection.gaadi.com/assets/data/tag_images/rear_left_tyre.jpg",
+    "maskUrl": ""
+  },
+  {
+    "mandatory": false,
+    "numberOfPhotos": 0,
+    "tagId": "108",
+    "tagName": "Front Left Tyre",
+    "description": "",
+    "location": null,
+    "tagPreviewUrl": "https://qa1inspection.gaadi.com/assets/data/tag_images/front_left_tyre.jpg",
+    "maskUrl": ""
+  },
+  {
+    "mandatory": true,
+    "numberOfPhotos": 0,
+    "tagId": "105",
+    "tagName": "Engine Compartment",
+    "description": "",
+    "location": null,
+    "tagPreviewUrl": "https://qa1inspection.gaadi.com/assets/data/tag_images/Engine.jpg",
+    "maskUrl": ""
+  },
+  {
+    "mandatory": false,
+    "numberOfPhotos": 0,
+    "tagId": "115",
+    "tagName": "VinPlate Photo",
+    "description": "",
+    "location": null,
+    "tagPreviewUrl": "https://qa1inspection.gaadi.com/assets/data/tag_images/VINplate.jpg",
+    "maskUrl": ""
+  }
+]
