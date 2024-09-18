@@ -25,36 +25,88 @@ class CustomCamera extends StatelessWidget {
               ),
             ),
             Positioned(
-              bottom: 20,
-              left: 20,
-              child: GestureDetector(
-                onTap: () => controller.closeCamera(),
-                child: const Text(
-                  'Done',
-                  style: TextStyle(
-                    color: Colors.white,
-                    fontSize: 20,
-                    fontWeight: FontWeight.bold,
+              top:0,
+                left: 0,
+                right: 0,
+                child: Container(
+                  color: Colors.black.withOpacity(0.4),
+                  child: Row(
+                    mainAxisSize: MainAxisSize.max,
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    crossAxisAlignment: CrossAxisAlignment.center,
+                    children: [
+                      Visibility(
+                        visible:controller.isPreviousVisible().value,
+                        child: InkWell(
+                          onTap: (){
+                            controller.onPrevious();
+                          },
+                          child: _getButton("Previous"),
+                        ),
+                      ),
+                      Text(
+                        controller.tagTitle.value,
+                        style: const TextStyle(
+                          color: Colors.orange,
+                        ),
+                      ),
+                      Visibility(
+                        visible: controller.isNextVisible().value,
+                        child: InkWell(
+                          onTap: (){
+                            controller.onNext();
+                          },
+                          child: _getButton("Next"),
+                        ),
+                      ),
+                    ],
                   ),
+                )
+            ),
+            Positioned(
+              bottom: 0,
+              left: 0,
+              right: 0,
+              child: Container(
+                color: Colors.black.withOpacity(0.4),
+                child: Row(
+                  mainAxisSize: MainAxisSize.max,
+                  mainAxisAlignment: MainAxisAlignment.start,
+                  crossAxisAlignment: CrossAxisAlignment.center,
+                  children: [
+                    InkWell(
+                      onTap: () {
+                        controller.closeCamera();
+                      },
+                      child: _getButton("Done"),
+                    ),
+                  ],
                 ),
               ),
             ),
             Positioned(
-              bottom: 20,
-              left: MediaQuery.of(context).size.width / 2 - 30,
-              child: FloatingActionButton(
-                backgroundColor: Colors.transparent,
-                onPressed: () => controller.takePhoto(),
-                elevation: 0,
-                shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(0),
-                ),
-                child: const Icon(
-                  size: 48,
-                  Icons.camera_alt,
-                  color: Colors.white,
-                ),
-              ),
+              right: 10,
+                top: 0,
+                bottom: 0,
+                child: Column(
+                  mainAxisSize: MainAxisSize.max,
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    FloatingActionButton(
+                      backgroundColor: Colors.black.withOpacity(0.4),
+                      onPressed: () => controller.takePhoto(),
+                      elevation: 0,
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(10),
+                      ),
+                      child: const Icon(
+                        size: 48,
+                        Icons.camera_alt,
+                        color: Colors.white,
+                      ),
+                    ),
+                  ],
+                )
             ),
             if (controller.isCapturing.value)
               _getLoader()
@@ -86,4 +138,21 @@ class CustomCamera extends StatelessWidget {
     );
   }
 
+  Widget _getButton(String text) {
+    return Padding(
+      padding: const EdgeInsets.symmetric(vertical: 5,horizontal: 10),
+      child: Container(
+        color: Colors.black,
+        padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
+        child: Text(
+          text,
+          style: const TextStyle(
+            color: Colors.white,
+            fontSize: 18,
+            fontWeight: FontWeight.bold,
+          ),
+        ),
+      ),
+    );
+  }
 }
