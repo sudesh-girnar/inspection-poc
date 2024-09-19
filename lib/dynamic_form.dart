@@ -88,8 +88,12 @@ class DynamicForm extends StatelessWidget {
                 return button(
                     title: "Next",
                     onClick: () {
-                      controller.savePage(formTitle, formValues);
-                      controller.nextPage();
+                      if(controller.validateFormFields(formValues)){
+                        controller.savePage(formTitle, formValues);
+                        controller.nextPage();
+                      } else {
+                        controller.showValidationError();
+                      }
                     });
               }
               return Container();
@@ -135,13 +139,13 @@ class DynamicForm extends StatelessWidget {
                 () {
                   return CheckboxListTile(
                     title: Text(option['val']),
-                    value: formValues[title]?[option['key']] ?? false,
+                    value: formValues[field['key']]?[option['key']] ?? false,
                     onChanged: (value) {
                       bool allowMultiCheck = true; // from api
                       if (allowMultiCheck) {
                         final map = formValues[title] ?? {};
                         map[option['key']] = value;
-                        formValues[title] = map;
+                        formValues[field['key']] = map;
                       } else {
                         formValues[title] = {option['key']: value};
                       }
