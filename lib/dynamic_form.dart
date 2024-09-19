@@ -18,25 +18,45 @@ class DynamicForm extends StatelessWidget {
         final List<dynamic> formData = data["form"];
 
         return Scaffold(
-          appBar: AppBar(title: Text(formTitle)),
-          body: Column(
-            children: [
-              Expanded(
-                child: ListView.separated(
-                  itemCount: formData.length,
-                  itemBuilder: (context, index) {
-                    final field = formData[index];
-                    return _buildFormField(field);
-                  },
-                  separatorBuilder: (BuildContext context, int index) {
-                    return const SizedBox(
-                      height: 15,
-                    );
-                  },
-                ).paddingSymmetric(horizontal: 16, vertical: 8),
+          appBar: AppBar(
+            title: Text(
+              formTitle,
+              style: const TextStyle(
+                color: Colors.white,
               ),
-              bottomBar(formTitle),
-            ],
+            ),
+            backgroundColor: Colors.orange,
+            leading: IconButton(
+              icon: const Icon(
+                Icons.arrow_back,
+                color: Colors.white,
+              ),
+              onPressed: () {
+                Navigator.pop(context);
+              },
+            ),
+          ),
+          body: Container(
+            color: Colors.grey.shade200,
+            child: Column(
+              children: [
+                Expanded(
+                  child: ListView.separated(
+                    itemCount: formData.length,
+                    itemBuilder: (context, index) {
+                      final field = formData[index];
+                      return _buildFormField(field);
+                    },
+                    separatorBuilder: (BuildContext context, int index) {
+                      return const SizedBox(
+                        height: 15,
+                      );
+                    },
+                  ).paddingSymmetric(horizontal: 16, vertical: 8),
+                ),
+                bottomBar(formTitle),
+              ],
+            ),
           ),
         );
       },
@@ -68,8 +88,12 @@ class DynamicForm extends StatelessWidget {
                 return button(
                     title: "Next",
                     onClick: () {
-                      controller.savePage(formTitle, formValues);
-                      controller.nextPage();
+                      if(controller.validateFormFields(formValues)){
+                        controller.savePage(formTitle, formValues);
+                        controller.nextPage();
+                      } else {
+                        controller.showValidationError();
+                      }
                     });
               }
               return Container();
@@ -95,94 +119,154 @@ class DynamicForm extends StatelessWidget {
 
   Widget _buildCheckboxField(Map<String, dynamic> field) {
     final String title = field['title'];
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: [
-        Text(
-          title,
-          style: const TextStyle(fontWeight: FontWeight.bold),
-        ),
-        Column(
-          children: (field['options'] as List<dynamic>).map((option) {
-            return Obx(
-              () {
-                return CheckboxListTile(
-                  title: Text(option['val']),
-                  value: formValues[title]?[option['key']] ?? false,
-                  onChanged: (value) {
-                    bool allowMultiCheck = true; // from api
-                    if (allowMultiCheck) {
-                      final map = formValues[title] ?? {};
-                      map[option['key']] = value;
-                      formValues[title] = map;
-                    } else {
-                      formValues[title] = {option['key']: value};
-                    }
-                  },
-                );
-              },
-            );
-          }).toList(),
-        ),
-      ],
+    return Container(
+      padding: const EdgeInsets.all(10.0),
+      color: Colors.white,
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Text(
+            title,
+            style: const TextStyle(fontWeight: FontWeight.bold, color: Colors.black54),
+          ),
+          Container(
+            height: 1,
+            color: Colors.grey,
+          ),
+          Column(
+            children: (field['options'] as List<dynamic>).map((option) {
+              return Obx(
+                () {
+                  return CheckboxListTile(
+                    title: Text(option['val']),
+                    value: formValues[field['key']]?[option['key']] ?? false,
+                    onChanged: (value) {
+                      bool allowMultiCheck = true; // from api
+                      if (allowMultiCheck) {
+                        final map = formValues[title] ?? {};
+                        map[option['key']] = value;
+                        formValues[field['key']] = map;
+                      } else {
+                        formValues[title] = {option['key']: value};
+                      }
+                    },
+                    controlAffinity: ListTileControlAffinity.leading,
+                    contentPadding: EdgeInsets.zero,
+                  );
+                },
+              );
+            }).toList(),
+          ),
+        ],
+      ),
     );
   }
 
   Widget _buildRadioField(Map<String, dynamic> field) {
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: [
-        Text(field['title'],
-            style: const TextStyle(fontWeight: FontWeight.bold)),
-        Column(
-          children: (field['options'] as List<dynamic>).map((option) {
-            return Obx(
-              () {
-                return RadioListTile(
-                  title: Text(option['val']),
-                  value: option['key'],
-                  groupValue: formValues[field['key']],
-                  onChanged: (value) {
-                    formValues[field['key']] = value;
-                  },
-                );
-              },
-            );
-          }).toList(),
-        ),
-      ],
+    return Container(
+      padding: const EdgeInsets.all(10.0),
+      color: Colors.white,
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Text(field['title'],
+              style: const TextStyle(
+                  fontWeight: FontWeight.bold, color: Colors.black54)),
+          Container(
+            height: 1,
+            color: Colors.grey,
+          ),
+          field['rule'].toString().toLowerCase() == 'horizontal'
+              ? Wrap(
+                  children: (field['options'] as List<dynamic>).map((option) {
+                    return Obx(
+                      () {
+                        return GestureDetector(
+                          onTap: () {
+                            formValues[field['key']] = option['key'];
+                          },
+                          child: Row(
+                            mainAxisSize: MainAxisSize.min,
+                            children: [
+                              Radio(
+                                value: option['key'],
+                                groupValue: formValues[field['key']],
+                                onChanged: (value) {
+                                  formValues[field['key']] = value;
+                                },
+                              ),
+                              Text(
+                                option['val'],
+                                style: const TextStyle(fontSize: 16),
+                              ),
+                            ],
+                          ),
+                        );
+                      },
+                    );
+                  }).toList(),
+                )
+              : Column(
+                  children: (field['options'] as List<dynamic>).map((option) {
+                    return Obx(
+                      () {
+                        return RadioListTile(
+                          title: Text(option['val']),
+                          value: option['key'],
+                          groupValue: formValues[field['key']],
+                          onChanged: (value) {
+                            formValues[field['key']] = value;
+                          },
+                          contentPadding: EdgeInsets.zero,
+                          controlAffinity: ListTileControlAffinity.leading,
+                        );
+                      },
+                    );
+                  }).toList(),
+                ),
+        ],
+      ),
     );
   }
 
   Widget _buildDatePickerField(Map<String, dynamic> field) {
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: [
-        Text(field['title'],
-            style: const TextStyle(fontWeight: FontWeight.bold)),
-        Obx(
-          () {
-            return TextButton(
-              onPressed: () async {
-                DateTime? selectedDate = await showDatePicker(
-                  context: Get.context!,
-                  initialDate: DateTime.now(),
-                  firstDate: DateTime(2000),
-                  lastDate: DateTime(2100),
-                );
-                if (selectedDate != null) {
-                  formValues[field['key']] = selectedDate;
-                }
-              },
-              child: Text(
-                formValues[field['key']] == null
-                    ? "Pick a Date"
-                    : formValues[field['key']].toString(),
-              ),
-            );
-          },
-        )
-      ],
+    return Container(
+      padding: const EdgeInsets.all(10.0),
+      color: Colors.white,
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Text(field['title'],
+              style: const TextStyle(fontWeight: FontWeight.bold, color: Colors.black54)),
+          Container(
+            height: 1,
+            color: Colors.grey,
+          ),
+          Obx(
+            () {
+              return TextButton(
+                onPressed: () async {
+                  DateTime? selectedDate = await showDatePicker(
+                    context: Get.context!,
+                    initialDate: DateTime.now(),
+                    firstDate: DateTime(2000),
+                    lastDate: DateTime(2100),
+                  );
+                  if (selectedDate != null) {
+                    formValues[field['key']] = selectedDate;
+                  }
+                },
+                child: Text(
+                  formValues[field['key']] == null
+                      ? "Pick a Date"
+                      : formValues[field['key']].toString(),
+                  style: const TextStyle(color: Colors.black),
+                ),
+              );
+            },
+          )
+        ],
+      ),
     );
   }
 

@@ -1,6 +1,6 @@
 import 'dart:convert';
 import 'dart:io';
-import 'package:flutter/cupertino.dart';
+import 'package:flutter/material.dart';
 import 'package:flutter/services.dart' show rootBundle;
 import 'package:get/get.dart';
 
@@ -75,4 +75,35 @@ class PocController extends GetxController {
     }
 
   }
+
+  bool validateFormFields(Map<String, dynamic> formValues) {
+    final data = currentPage.value!;
+    final List<dynamic> formData = data["form"];
+
+    for (var field in formData) {
+      final String fieldKey = field['key'];
+      if(formValues.containsKey(fieldKey)){
+        var value = formValues[fieldKey];
+        if(value == null || value.toString().isEmpty){
+          return false;
+        }
+      } else{
+        return false;
+      }
+    }
+
+    return true;
+  }
+
+  void showValidationError() {
+    Get.snackbar(
+      "Form Incomplete",
+      "Please fill out all required fields before proceeding.",
+      snackPosition: SnackPosition.BOTTOM,
+      backgroundColor: Colors.redAccent,
+      colorText: Colors.white,
+    );
+  }
+
+
 }
