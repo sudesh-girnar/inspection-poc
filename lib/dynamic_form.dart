@@ -44,8 +44,8 @@ class DynamicForm extends StatelessWidget {
                   child: ListView.separated(
                     itemCount: formData.length,
                     itemBuilder: (context, index) {
-                      final field = formData[index];
-                      return _buildFormField(field);
+                      final question = formData[index];
+                      return _buildFormField(question);
                     },
                     separatorBuilder: (BuildContext context, int index) {
                       return const SizedBox(
@@ -104,21 +104,21 @@ class DynamicForm extends StatelessWidget {
     );
   }
 
-  Widget _buildFormField(Map<String, dynamic> field) {
-    switch (field['type']) {
+  Widget _buildFormField(Map<String, dynamic> question) {
+    switch (question['type']) {
       case 'checkbox':
-        return _buildCheckboxField(field);
+        return _buildCheckboxField(question);
       case 'radio':
-        return _buildRadioField(field);
+        return _buildRadioField(question);
       case 'date':
-        return _buildDatePickerField(field);
+        return _buildDatePickerField(question);
       default:
         return const SizedBox.shrink(); // If the type is not supported
     }
   }
 
-  Widget _buildCheckboxField(Map<String, dynamic> field) {
-    final String title = field['title'];
+  Widget _buildCheckboxField(Map<String, dynamic> question) {
+    final String title = question['title'];
     return Container(
       padding: const EdgeInsets.all(10.0),
       color: Colors.white,
@@ -134,18 +134,18 @@ class DynamicForm extends StatelessWidget {
             color: Colors.grey,
           ),
           Column(
-            children: (field['options'] as List<dynamic>).map((option) {
+            children: (question['options'] as List<dynamic>).map((option) {
               return Obx(
                 () {
                   return CheckboxListTile(
                     title: Text(option['val']),
-                    value: formValues[field['key']]?[option['key']] ?? false,
+                    value: formValues[question['key']]?[option['key']] ?? false,
                     onChanged: (value) {
                       bool allowMultiCheck = true; // from api
                       if (allowMultiCheck) {
                         final map = formValues[title] ?? {};
                         map[option['key']] = value;
-                        formValues[field['key']] = map;
+                        formValues[question['key']] = map;
                       } else {
                         formValues[title] = {option['key']: value};
                       }
